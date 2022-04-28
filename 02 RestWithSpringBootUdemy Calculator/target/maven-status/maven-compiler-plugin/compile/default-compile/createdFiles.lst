@@ -1,6 +1,9 @@
 com\devthiagofurtado\Greeting.class
 com\devthiagofurtado\exception\UnsuportedMathOperationException.class
+com\devthiagofurtado\enums\Operacao.class
+com\devthiagofurtado\exception\ExceptionResponse.class
+com\devthiagofurtado\service\MathService.class
 com\devthiagofurtado\exception\handler\CustomizedResponseEntityExceptionHandler.class
 com\devthiagofurtado\controller\MathController.class
-com\devthiagofurtado\exception\ExceptionResponse.class
+com\devthiagofurtado\service\MathService$1.class
 com\devthiagofurtado\Startup.class

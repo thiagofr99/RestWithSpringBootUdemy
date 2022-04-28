@@ -1,6 +1,0 @@
-com\devthiagofurtado\Greeting.class
-com\devthiagofurtado\exception\UnsuportedMathOperationException.class
-com\devthiagofurtado\exception\handler\CustomizedResponseEntityExceptionHandler.class
-com\devthiagofurtado\controller\MathController.class
-com\devthiagofurtado\exception\ExceptionResponse.class
-com\devthiagofurtado\Startup.class
