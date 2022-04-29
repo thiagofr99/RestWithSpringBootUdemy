@@ -1,0 +1,4 @@
+com\devthiagofurtado\service\PersonServiceTest.class
+com\devthiagofurtado\converter\DozerConverterTest.class
+com\devthiagofurtado\converter\mocks\MockPerson.class
+com\devthiagofurtado\controller\PersonControllerTest.class
