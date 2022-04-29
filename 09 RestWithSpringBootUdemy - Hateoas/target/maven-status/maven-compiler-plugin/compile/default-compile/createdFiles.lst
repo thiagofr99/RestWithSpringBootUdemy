@@ -1,0 +1,12 @@
+com\devthiagofurtado\data\vo\PersonVO.class
+com\devthiagofurtado\data\model\Person.class
+com\devthiagofurtado\exception\UnsuportedMathOperationException.class
+com\devthiagofurtado\exception\handler\CustomizedResponseEntityExceptionHandler.class
+com\devthiagofurtado\converter\DozerConverter.class
+com\devthiagofurtado\Greeting.class
+com\devthiagofurtado\enums\Operacao.class
+com\devthiagofurtado\exception\ExceptionResponse.class
+com\devthiagofurtado\controller\PersonController.class
+com\devthiagofurtado\repository\PersonRepository.class
+com\devthiagofurtado\service\PersonService.class
+com\devthiagofurtado\Startup.class
