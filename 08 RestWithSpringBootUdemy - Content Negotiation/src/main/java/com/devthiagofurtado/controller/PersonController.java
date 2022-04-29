@@ -16,22 +16,24 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO buscarPorId(@PathVariable(value = "id") Long id) {
         return personService.findById(id);
     }
 
-    @GetMapping()
+    @GetMapping(value = {}, produces = {"application/json", "application/xml", "application/x-yaml"})
     public List<PersonVO> buscarTodos() {
         return personService.findAll();
     }
 
-    @PostMapping("/salvar")
+    @PostMapping(value = "/salvar", produces = {"application/json", "application/xml", "application/x-yaml"}
+            , consumes = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO salvar(@RequestBody PersonVO person) {
         return personService.create(person);
     }
 
-    @PutMapping("/atualizar")
+    @PutMapping( value = "/atualizar", produces = {"application/json", "application/xml", "application/x-yaml"}
+            , consumes = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO atualizar(@RequestBody Person person) {
         return personService.update(person);
     }
