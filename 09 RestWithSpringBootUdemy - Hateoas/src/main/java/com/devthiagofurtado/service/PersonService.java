@@ -21,8 +21,8 @@ public class PersonService {
         return DozerConverter.parseObject(personRepository.save(DozerConverter.parseObject(person,Person.class)), PersonVO.class);
     }
 
-    public PersonVO update(Person person) {
-        Person personAntigo = personRepository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Person não localizado."));
+    public PersonVO update(PersonVO person) {
+        Person personAntigo = personRepository.findById(person.getKey()).orElseThrow(() -> new ResourceNotFoundException("Person não localizado."));
         personAntigo.setAddress(person.getAddress());
         personAntigo.setFirstName(person.getFirstName());
         personAntigo.setLastName(person.getLastName());

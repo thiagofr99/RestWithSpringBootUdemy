@@ -1,23 +1,27 @@
 package com.devthiagofurtado.data.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.io.Serializable;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({"id", "address", "firstName", "lastName", "gender"})
-public class PersonVO implements Serializable {
+@JsonPropertyOrder({"id", "firstName", "lastName", "address", "gender"})
+public class PersonVO extends ResourceSupport implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
-    private Long id;
+    @Mapping("id")
+    @JsonProperty("id")
+    private Long key;
 
     private String firstName;
 

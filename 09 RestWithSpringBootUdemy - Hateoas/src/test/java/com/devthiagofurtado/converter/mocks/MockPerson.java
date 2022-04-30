@@ -2,7 +2,6 @@ package com.devthiagofurtado.converter.mocks;
 
 import com.devthiagofurtado.data.model.Person;
 import com.devthiagofurtado.data.vo.PersonVO;
-import org.mockito.InjectMocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,7 @@ public class MockPerson {
         person.setAddress("Addres Test" + number);
         person.setFirstName("First Name Test" + number);
         person.setGender(((number % 2)==0) ? "Male" : "Female");
-        person.setId(number.longValue());
+        person.setKey(number.longValue());
         person.setLastName("Last Name Test" + number);
         return person;
     }

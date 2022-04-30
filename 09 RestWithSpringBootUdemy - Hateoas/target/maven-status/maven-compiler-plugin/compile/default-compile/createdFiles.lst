@@ -9,4 +9,6 @@ com\devthiagofurtado\exception\ExceptionResponse.class
 com\devthiagofurtado\controller\PersonController.class
 com\devthiagofurtado\repository\PersonRepository.class
 com\devthiagofurtado\service\PersonService.class
+com\devthiagofurtado\config\WebConfig.class
+com\devthiagofurtado\serialization\converter\YamlJackson2HttpMessageConverter.class
 com\devthiagofurtado\Startup.class
