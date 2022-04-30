@@ -1,0 +1,14 @@
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\exception\UnsuportedMathOperationException.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\data\model\Person.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\service\PersonService.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\Greeting.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\controller\PersonController.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\enums\Operacao.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\converter\DozerConverter.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\data\vo\PersonVO.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\exception\handler\CustomizedResponseEntityExceptionHandler.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\exception\ExceptionResponse.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\serialization\converter\YamlJackson2HttpMessageConverter.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\config\WebConfig.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\Startup.java
+C:\Users\thiag\Desktop\Java Curso\09 RestWithSpringBootUdemy - Hateoas\src\main\java\com\devthiagofurtado\repository\PersonRepository.java
