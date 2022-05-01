@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="07 RestWithSpringBootUdemy - Custom Json Serialization" />
+        <module name="12 RestWithSpringBootUdemy - CORS" />
         <module name="08 RestWithSpringBootUdemy - Content Negotiation" />
         <module name="06 RestWithSpringBootUdemy - Migrations" />
         <module name="04 RestWithSpringBootUdemy - Dozer Converter (VO)" />
@@ -34,6 +35,7 @@
       <module name="09 RestWithSpringBootUdemy - Hateoas" options="-parameters" />
       <module name="10 RestWithSpringBootUdemy - Swagger" options="-parameters" />
       <module name="11 RestWithSpringBootUdemy - Desafio" options="-parameters" />
+      <module name="12 RestWithSpringBootUdemy - CORS" options="-parameters" />
     </option>
   </component>
 </project>
