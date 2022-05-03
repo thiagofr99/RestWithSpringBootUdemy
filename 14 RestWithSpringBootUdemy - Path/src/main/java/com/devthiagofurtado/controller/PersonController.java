@@ -1,11 +1,11 @@
 package com.devthiagofurtado.controller;
 
-import com.devthiagofurtado.data.model.Person;
 import com.devthiagofurtado.data.vo.PersonVO;
 import com.devthiagofurtado.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,7 @@ public class PersonController {
     @GetMapping(value = {}, produces = {"application/json", "application/xml", "application/x-yaml"})
     public List<PersonVO> buscarTodos() {
         List<PersonVO> personVOS = personService.findAll();
-        personVOS.forEach(p->{
+        personVOS.forEach(p -> {
             p.add(linkTo(methodOn(PersonController.class).buscarPorId(p.getKey())).withSelfRel());
         });
         return personVOS;
@@ -44,13 +44,13 @@ public class PersonController {
     @PostMapping(value = "/salvar", produces = {"application/json", "application/xml", "application/x-yaml"}
             , consumes = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO salvar(@RequestBody PersonVO person) {
-        PersonVO personVO =personService.create(person);
+        PersonVO personVO = personService.create(person);
         personVO.add(linkTo(methodOn(PersonController.class).buscarPorId(personVO.getKey())).withSelfRel());
         return personVO;
     }
 
     @ApiOperation(value = "Atualiza um registro de Person.")
-    @PutMapping( value = "/atualizar", produces = {"application/json", "application/xml", "application/x-yaml"}
+    @PutMapping(value = "/atualizar", produces = {"application/json", "application/xml", "application/x-yaml"}
             , consumes = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO atualizar(@RequestBody PersonVO person) {
         PersonVO personVO = personService.update(person);
@@ -63,6 +63,15 @@ public class PersonController {
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         personService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @ApiOperation(value = "Desabilita um registro de Person.")
+    @PatchMapping("/{id}")
+    public ResponseEntity<PersonVO> desabilitar(@PathVariable(value = "id") Long id) {
+        personService.desabilitar(id);
+        PersonVO vo = personService.findById(id);
+        vo.add(linkTo(methodOn(PersonController.class).buscarPorId(vo.getKey())).withSelfRel());
+        return new ResponseEntity<>(vo, HttpStatus.OK);
     }
 
 }
