@@ -23,7 +23,7 @@ public class DozerConverter {
 
     }
 
-    public static <O, D> Page<D> parsePageObjects(List<O> origin, Class<D> destination) {
+    public static <O, D> Page<D> parsePageObjects(Page<O> origin, Class<D> destination) {
 
         return new PageImpl<>(origin.stream().map(o -> mapper.map(o, destination)).collect(Collectors.toList()));
 

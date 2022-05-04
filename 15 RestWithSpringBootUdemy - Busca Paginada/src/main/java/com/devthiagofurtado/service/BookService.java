@@ -8,10 +8,12 @@ import com.devthiagofurtado.data.vo.PersonVO;
 import com.devthiagofurtado.repository.BookRepository;
 import com.devthiagofurtado.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -44,7 +46,18 @@ public class BookService {
         return DozerConverter.parseObject(bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book não localizado.")), BooksVO.class);
     }
 
-    public List<BooksVO> findAll() {
-        return DozerConverter.parseListObjects(bookRepository.findAll(), BooksVO.class);
+    public Page<BooksVO> findAll(Pageable pageable) {
+        var page = bookRepository.findAll(pageable);
+        return page.map(this::convertToBookVO);
+    }
+
+    public Page<BooksVO> findAllByAuthor(String author, Pageable pageable) {
+        var page = bookRepository.findAllByLikeAuthor(author, pageable);
+        return page.map(this::convertToBookVO);
+    }
+
+    private BooksVO convertToBookVO(Book book) {
+
+        return DozerConverter.parseObject(book, BooksVO.class);
     }
 }

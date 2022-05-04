@@ -18,12 +18,16 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -64,6 +68,9 @@ class PersonControllerTest {
         BDDMockito.when(personService.findById(ArgumentMatchers.anyLong()))
                 .thenReturn(PersonCreator.voComId());
 
+        BDDMockito.when(personService.findAllByFirstName(ArgumentMatchers.anyString(),ArgumentMatchers.any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(PersonCreator.voComId())));
+
         BDDMockito.when(personService.create(ArgumentMatchers.any(PersonVO.class)))
                 .thenReturn(PersonCreator.voComId());
 
@@ -80,6 +87,17 @@ class PersonControllerTest {
     void buscarTodos() throws Exception {
         mockMvc.perform(get(BASE_URL).headers(headers)).andExpect(status().isOk());
     }
+
+    @Test
+    void buscarTodosPorFirstName() throws Exception {
+        LinkedMultiValueMap<String, String> param = new LinkedMultiValueMap<>();
+        param.add("page", "1");
+        param.add("limit", "10");
+        param.add("direction", "ASC");
+        param.add("firstName", "a");
+        mockMvc.perform(get(BASE_URL+"/findAllByFirstName").params(param).headers(headers)).andExpect(status().isOk());
+    }
+
 
     @Test
     void salvar() throws Exception {

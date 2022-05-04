@@ -16,6 +16,7 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.*;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -43,6 +44,9 @@ class BookServiceTest {
 
         BDDMockito.when(bookRepository.findAll())
                 .thenReturn(Collections.singletonList(BookCreator.entityComId()));
+
+        BDDMockito.when(bookRepository.findAll(ArgumentMatchers.any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(BookCreator.entityComId())));
 
         BDDMockito.doNothing().when(bookRepository).delete(ArgumentMatchers.any(Book.class));
 
@@ -106,10 +110,12 @@ class BookServiceTest {
     @Test
     void findAll() {
 
-        List<BooksVO> teste = bookService.findAll();
+        Pageable pageable = PageRequest.of(1,5, Sort.by(Sort.Direction.ASC,"firstName"));
+
+        Page<BooksVO> teste = bookService.findAll(pageable);
 
 
         Assertions.assertThat(teste).isNotNull().isNotEmpty();
-        Assertions.assertThat(teste.get(0).getKey()).isNotNull();
+        Assertions.assertThat(teste.getContent().get(0).getKey()).isNotNull();
     }
 }

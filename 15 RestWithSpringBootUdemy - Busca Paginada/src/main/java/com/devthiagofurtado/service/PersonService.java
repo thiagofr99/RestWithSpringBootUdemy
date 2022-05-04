@@ -11,8 +11,6 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class PersonService {
 
@@ -21,7 +19,7 @@ public class PersonService {
 
     public PersonVO create(PersonVO person) {
 
-        return DozerConverter.parseObject(personRepository.save(DozerConverter.parseObject(person,Person.class)), PersonVO.class);
+        return DozerConverter.parseObject(personRepository.save(DozerConverter.parseObject(person, Person.class)), PersonVO.class);
     }
 
     public PersonVO update(PersonVO person) {
@@ -44,11 +42,23 @@ public class PersonService {
     }
 
     public Page<PersonVO> findAll(Pageable pageable) {
-        return DozerConverter.parsePageObjects(personRepository.findAll(pageable).getContent(), PersonVO.class);
+        var page = personRepository.findAll(pageable);
+
+        return page.map(this::convertToPersonVO);
+    }
+
+    private PersonVO convertToPersonVO(Person person) {
+        return DozerConverter.parseObject(person, PersonVO.class);
     }
 
     @Transactional
     public void desabilitar(Long id) {
         personRepository.disablePerson(id);
+    }
+
+    public Page<PersonVO> findAllByFirstName(String firstName, Pageable pageable) {
+        var page = personRepository.findAllByFirstName(firstName, pageable);
+
+        return page.map(this::convertToPersonVO);
     }
 }

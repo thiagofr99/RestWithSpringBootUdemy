@@ -16,12 +16,17 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -68,6 +73,9 @@ class BookControllerTest {
 
         BDDMockito.when(bookService.update(ArgumentMatchers.any(BooksVO.class)))
                 .thenReturn(BookCreator.voComId());
+
+        BDDMockito.when(bookService.findAllByAuthor(ArgumentMatchers.anyString(),ArgumentMatchers.any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(BookCreator.voComId())));
     }
 
     @Test
@@ -78,6 +86,16 @@ class BookControllerTest {
     @Test
     void buscarTodos() throws Exception {
         mockMvc.perform(get(BASE_URL).headers(headers)).andExpect(status().isOk());
+    }
+
+    @Test
+    void buscarTodosPorAuthor() throws Exception {
+        LinkedMultiValueMap<String, String> param = new LinkedMultiValueMap<>();
+        param.add("page", "1");
+        param.add("limit", "10");
+        param.add("direction", "ASC");
+        param.add("author", "a");
+        mockMvc.perform(get(BASE_URL+"/findAllByAuthor").params(param).headers(headers)).andExpect(status().isOk());
     }
 
     @Test

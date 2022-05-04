@@ -9,11 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -26,6 +25,9 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private PagedResourcesAssembler<PersonVO> assembler;
+
     @ApiOperation(value = "Buscar Person por Id.")
     @GetMapping(value = "/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
     public PersonVO buscarPorId(@PathVariable(value = "id") Long id) {
@@ -36,20 +38,37 @@ public class PersonController {
 
     @ApiOperation(value = "Buscar todos registros de Person.")
     @GetMapping(value = {}, produces = {"application/json", "application/xml", "application/x-yaml"})
-    public Page<PersonVO> buscarTodos(@RequestParam(value = "page", defaultValue = "0") int page,
-                                      @RequestParam(value = "limit", defaultValue = "12") int limit,
-                                      @RequestParam(value = "direction", defaultValue = "ASC") String direction
-                                      ) {
+    public ResponseEntity<?> buscarTodos(@RequestParam(value = "page", defaultValue = "0") int page,
+                                         @RequestParam(value = "limit", defaultValue = "12") int limit,
+                                         @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 
-        var sortDirection = "desc".equalsIgnoreCase(direction) ? Sort.Direction.DESC: Sort.Direction.ASC;
+        var sortDirection = "desc".equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
 
-        Pageable pageable = PageRequest.of(page,limit);
+        Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "firstName"));
 
         Page<PersonVO> personVOS = personService.findAll(pageable);
         personVOS.forEach(p -> {
             p.add(linkTo(methodOn(PersonController.class).buscarPorId(p.getKey())).withSelfRel());
         });
-        return personVOS;
+        return new ResponseEntity<>(assembler.toResource(personVOS), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Busca todos registros de Person por FirstName")
+    @GetMapping(value = {"/findAllByFirstName"}, produces = {"application/json", "application/xml", "application/x-yaml"})
+    public ResponseEntity<?> buscarTodosPorAuthor(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                  @RequestParam(value = "limit", defaultValue = "12") int limit,
+                                                  @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+                                                  @RequestParam(value = "firstName", defaultValue = "") String firstName
+
+    ) {
+        var sortDirection = "desc".equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "firstName"));
+        Page<PersonVO> booksVO = personService.findAllByFirstName(firstName, pageable);
+        booksVO.forEach(p -> {
+            p.add(linkTo(methodOn(BookController.class).buscarPorId(p.getKey())).withSelfRel());
+        });
+        return new ResponseEntity<>(assembler.toResource(booksVO), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Cria um registro de Person.")
