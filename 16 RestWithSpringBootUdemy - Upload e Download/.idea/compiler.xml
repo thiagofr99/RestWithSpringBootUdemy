@@ -20,6 +20,7 @@
         <module name="06 RestWithSpringBootUdemy - Migrations" />
         <module name="04 RestWithSpringBootUdemy - Dozer Converter (VO)" />
         <module name="03 RestWithSpringBootUdemy" />
+        <module name="16 RestWithSpringBootUdemy - Upload e Download" />
         <module name="15 RestWithSpringBootUdemy - Busca Paginada" />
         <module name="10 RestWithSpringBootUdemy - Swagger" />
       </profile>
@@ -42,6 +43,7 @@
       <module name="13 RestWithSpringBootUdemy - Autenticação (JWT e Spring Security)" options="-parameters" />
       <module name="14 RestWithSpringBootUdemy - Path" options="-parameters" />
       <module name="15 RestWithSpringBootUdemy - Busca Paginada" options="-parameters" />
+      <module name="16 RestWithSpringBootUdemy - Upload e Download" options="-parameters" />
     </option>
   </component>
 </project>
