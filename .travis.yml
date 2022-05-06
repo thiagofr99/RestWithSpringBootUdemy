@@ -13,6 +13,6 @@ deploy:
     docker push devthiagofurtado/rest-with-spring-boot-udemy;
     docker push devthiagofurtado/mysql-rest-with-spring-boot-udemy;
   on:
-    branch: master
+    branch: main
 notifications:
   email: false    
